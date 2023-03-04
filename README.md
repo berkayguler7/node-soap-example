@@ -1,4 +1,4 @@
-# nodejs-soap-example
+# node-soap-example
 A simple SOAP Service and client using node-soap, express and crypto.
 
 # Express
