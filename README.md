@@ -10,7 +10,7 @@ node-soap module is used to connect web services through SOAP by handling XML HT
 # Crypto
 Crypto library provides tools for cryptography, used to hash given input.
 
-Run the service:
+# Run the service
 ```
 npm run service
 ```
@@ -19,7 +19,7 @@ or
 node hashService.js
 ```
 
-Run the client:
+# Run the client
 ```
 npm run client
 ```
