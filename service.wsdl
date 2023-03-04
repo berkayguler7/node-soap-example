@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://localhost:3000/HashService" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:tns="http://localhost:3000/HashService" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  name="HashService">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost:3000/HashService">
+
+    <!-- complex types were used for exemplary reasons -->
+
+      <xsd:complexType name="User">
+        <xsd:sequence>
+          <xsd:element name="Id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="HashRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="users" type="tns:User" minOccurs="1" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:complexType name="IdHashPair">
+        <xsd:sequence>
+          <xsd:element name="Id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="Hash" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      
+      <xsd:element name="HashResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IdHashPairs" type="tns:IdHashPair" minOccurs="1" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+   
+  <wsdl:message name="HashSoapIn">
+    <wsdl:part element="tns:HashRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="HashSoapOut">
+    <wsdl:part element="tns:HashResponse" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:portType name="HashPort">
+    <wsdl:operation name="Hash">
+      <wsdl:input message="tns:HashSoapIn"/>
+      <wsdl:output message="tns:HashSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="HashServiceSoapBinding" type="tns:HashPort">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Hash">
+      <soap:operation
+              soapAction="Hash" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="HashService">
+    <wsdl:port binding="tns:HashServiceSoapBinding" name="HashServiceSOAP">
+      <soap:address location="http://localhost:3000/HashService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
