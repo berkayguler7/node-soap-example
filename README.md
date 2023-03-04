@@ -1,13 +1,14 @@
 # node-soap-example
 A simple SOAP Service and client using node-soap, express and crypto.
 
-# Express
+# Modules
+## Express
 Express is used to handle a simple GET request required for the client to access the WSDL.
 
-# SOAP
+## SOAP
 node-soap module is used to connect web services through SOAP by handling XML HTTP POST requests that utilize the service.
 
-# Crypto
+## Crypto
 Crypto library provides tools for cryptography, used to hash given input.
 
 # Run the service
